@@ -1,3 +1,4 @@
+import pl.coderslab.models.Exercise;
 import pl.coderslab.models.Group;
 import pl.coderslab.models.User;
 
@@ -34,9 +35,15 @@ public class App {
 //        Group group = new Group("Sępy");
 //        group.saveToDB(conn);
 
-        Group group = Group.loadById(conn, 2);
-        group.deleteGroup(conn);
-        System.out.println(group.getId());
+//        Group group = Group.loadById(conn, 2);
+//        group.deleteGroup(conn);
+//        System.out.println(group.getId());
+
+        Exercise exer = Exercise.loadById(conn,1);
+        System.out.println(exer.getId());
+        exer.deleteExercise(conn);
+        System.out.println(exer.getId());
+
 
         conn.close();
     }
