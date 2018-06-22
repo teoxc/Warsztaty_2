@@ -9,17 +9,14 @@ import java.sql.SQLException;
 public class App {
     public static void main(String[] args) throws SQLException {
         Connection conn = DBUtil.getConnection();
-//        User me = new User("teo2", "qwerty", "teo@teo.com");
+//        User me = new User("teo2", "qwerty", "fw@wp.pl");
 //        me.saveToDB(conn);
-//        conn.close();
 //        System.out.println(me.getId());
 
 //        User loaded = User.loadUserById(conn, 2);
-//        conn.close();
 //        System.out.println(loaded);
 
 //        User [] users = User.loadAllUsers(conn);
-//        conn.close();
 //        System.out.println(users.length);
 //        System.out.println(users[users.length-1].getEmail());
 //        System.out.println(users[users.length-1].getUsername());
@@ -28,10 +25,8 @@ public class App {
 //        loaded.setEmail("mateo@wp.pl");
 //        loaded.setUsername("mateo");
 //        loaded.saveToDB(conn);
-//        conn.close();
 
 //        loaded.delete(conn);
-//        conn.close();
 
 //        Group group = new Group("Sępy");
 //        group.saveToDB(conn);
@@ -45,9 +40,21 @@ public class App {
 //        exer.saveToDB(conn);
 //        System.out.println(exer.getId());
 
-        Solution[] sols = Solution.loadAll(conn);
-        System.out.println(sols[1].getCreated());
-        sols[1].deleteSolution(conn);
+//        Solution sol = new Solution("asdfghj",3,3);
+//        System.out.println(sols[1].getCreated());
+//        sols[1].deleteSolution(conn);
+//        sol.saveToDB(conn);
+
+//        Solution[] sols = Solution.loadAllByExerciseId(conn,3);
+//        for(int i = 0; i < sols.length; i++){
+//            System.out.println(sols[i].getUpdated());
+//        }
+
+        User[] users = User.loadAllByGrupId(conn,3);
+        for(int i = 0; i < users.length; i++){
+            System.out.println(users[i].getUsername());
+        }
+
 
         conn.close();
     }

@@ -49,8 +49,8 @@ public class Solution {
 
     public void saveToDB (Connection conn)throws SQLException{
         if(this.id == 0){
-            String sql = "insert into warsztaty.solution (description, created, exercise_id, users_id) " +
-                    "values (?, now(), ?, ?)";
+            String sql = "insert into warsztaty.solution (description, created, exercise_id, users_id, updated) " +
+                    "values (?, now(), ?, ?, now())";
             String generatedColumns[] = {"ID"};
             PreparedStatement preStat = conn.prepareStatement(sql, generatedColumns);
             preStat.setInt(2,this.exerciseId);
@@ -117,4 +117,48 @@ public class Solution {
         preStat.executeUpdate();
         this.id = 0;
     }
+
+    public static Solution[] loadAllByUserId(Connection conn,int userId) throws SQLException{
+        String sql = "select * from warsztaty.solution where users_id = ?";
+        PreparedStatement preStat = conn.prepareStatement(sql);
+        preStat.setInt(1, userId);
+        ResultSet rs = preStat.executeQuery();
+        List<Solution> sols = new ArrayList<>();
+        while(rs.next()){
+            Solution sol = new Solution();
+            sol.updated = rs.getString("updated");
+            sol.usersId = rs.getInt("users_id");
+            sol.exerciseId = rs.getInt("exercise_id");
+            sol.created = rs.getString("created");
+            sol.description = rs.getString("description");
+            sol.id = rs.getInt("id");
+            sols.add(sol);
+        }
+        Solution[] solsArr = new Solution[sols.size()];
+        solsArr = sols.toArray(solsArr);
+        return solsArr;
+    }
+
+    public static Solution[] loadAllByExerciseId (Connection conn,int exerciseId) throws SQLException{
+        String sql = "select * from warsztaty.solution where exercise_id = ? ORDER BY updated desc";
+        PreparedStatement preStat = conn.prepareStatement(sql);
+        preStat.setInt(1, exerciseId);
+        ResultSet rs = preStat.executeQuery();
+        List<Solution> sols = new ArrayList<>();
+        while(rs.next()){
+            Solution sol = new Solution();
+            sol.updated = rs.getString("updated");
+            sol.usersId = rs.getInt("users_id");
+            sol.exerciseId = rs.getInt("exercise_id");
+            sol.created = rs.getString("created");
+            sol.description = rs.getString("description");
+            sol.id = rs.getInt("id");
+            sols.add(sol);
+        }
+        Solution[] solsArr = new Solution[sols.size()];
+        solsArr = sols.toArray(solsArr);
+        return solsArr;
+    }
+
+
 }

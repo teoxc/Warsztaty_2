@@ -120,5 +120,23 @@ public class User {
         }
     }
 
+    public static User[] loadAllByGrupId(Connection conn, int groupId)throws SQLException{
+        String sql = "SELECT  * from warsztaty.users where user_group_id = ?";
+        PreparedStatement preStat = conn.prepareStatement(sql);
+        preStat.setInt(1, groupId);
+        ResultSet rs = preStat.executeQuery();
+        List<User> users = new ArrayList<>();
+        while(rs.next()){
+            User loadedUser = new User();
+            loadedUser.id = rs.getInt("id");
+            loadedUser.username = rs.getString("username");
+            loadedUser.password = rs.getString("password");
+            loadedUser.email = rs.getString("email");
+            users.add(loadedUser);
+        }
+        User[] uArray = new User[users.size()];
+        uArray = users.toArray(uArray);
+        return uArray;
+    }
 }
 
