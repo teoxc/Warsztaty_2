@@ -88,7 +88,8 @@ public class User {
             loadedUser.username = resultSet.getString("username");
             loadedUser.password = resultSet.getString("password");
             loadedUser.email = resultSet.getString("email");
-            return loadedUser;}
+            return loadedUser;
+        }
         return null;
     }
     static public User[] loadAllUsers(Connection conn) throws SQLException {
@@ -112,8 +113,7 @@ public class User {
     public void delete(Connection conn) throws SQLException {
         if (this.id != 0) {
             String sql = "DELETE FROM warsztaty.Users WHERE id= ?";
-            PreparedStatement preparedStatement;
-            preparedStatement = conn.prepareStatement(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, this.id);
             preparedStatement.executeUpdate();
             this.id=0;

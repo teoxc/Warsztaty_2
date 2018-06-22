@@ -1,3 +1,4 @@
+import pl.coderslab.models.Group;
 import pl.coderslab.models.User;
 
 import java.sql.Connection;
@@ -11,9 +12,9 @@ public class App {
 //        conn.close();
 //        System.out.println(me.getId());
 
-        User loaded = User.loadUserById(conn, 2);
-        //conn.close();
-        System.out.println(loaded);
+//        User loaded = User.loadUserById(conn, 2);
+//        conn.close();
+//        System.out.println(loaded);
 
 //        User [] users = User.loadAllUsers(conn);
 //        conn.close();
@@ -27,7 +28,16 @@ public class App {
 //        loaded.saveToDB(conn);
 //        conn.close();
 
-        loaded.delete(conn);
+//        loaded.delete(conn);
+//        conn.close();
+
+//        Group group = new Group("Sępy");
+//        group.saveToDB(conn);
+
+        Group group = Group.loadById(conn, 2);
+        group.deleteGroup(conn);
+        System.out.println(group.getId());
+
         conn.close();
     }
 }
