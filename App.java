@@ -1,5 +1,6 @@
 import pl.coderslab.models.Exercise;
 import pl.coderslab.models.Group;
+import pl.coderslab.models.Solution;
 import pl.coderslab.models.User;
 
 import java.sql.Connection;
@@ -39,11 +40,14 @@ public class App {
 //        group.deleteGroup(conn);
 //        System.out.println(group.getId());
 
-        Exercise exer = Exercise.loadById(conn,1);
-        System.out.println(exer.getId());
-        exer.deleteExercise(conn);
-        System.out.println(exer.getId());
+//        Exercise exer = new Exercise("Zadanie", "bla bla bla");
+//        System.out.println(exer.getId());
+//        exer.saveToDB(conn);
+//        System.out.println(exer.getId());
 
+        Solution[] sols = Solution.loadAll(conn);
+        System.out.println(sols[1].getCreated());
+        sols[1].deleteSolution(conn);
 
         conn.close();
     }
